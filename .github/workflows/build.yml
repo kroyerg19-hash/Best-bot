@@ -1,9 +1,10 @@
-name: Compilar Gipsy Rust
+name: Compilador Gipsy Rust
 
 on:
   workflow_dispatch:
   push:
     branches:
+      - principal
       - main
 
 jobs:
@@ -27,6 +28,10 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-
+
+      - name: Extrair projeto Rust
+        run: |
+          unzip -o gipsy-rust-github.zip -d .
 
       - name: Compilar
         run: cargo build --release
