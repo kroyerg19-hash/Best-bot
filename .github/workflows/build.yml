@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Instalar Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@nightly
 
       - name: Cache do Cargo
         uses: actions/cache@v4
