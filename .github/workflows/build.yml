@@ -31,7 +31,7 @@ jobs:
 
       - name: Extrair projeto Rust
         run: |
-          unzip -o gipsy-rust-github.zip -d .
+          gipsy-rust-github-corrigido.zip -d .
 
       - name: Compilar
         run: cargo build --release
