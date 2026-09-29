@@ -17,8 +17,6 @@ chrono = { version = "0.4", features = ["serde"] }
 regex = "1"
 thiserror = "2"
 rand = "0.9"
-rusqlite = { version = "0.37", features = ["bundled"] }
 
 # WhatsApp transport/protocol engine.
-# Current upstream project documents whatsapp-rust 0.7.
 whatsapp-rust = "0.7"
