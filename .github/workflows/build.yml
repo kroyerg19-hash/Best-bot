@@ -1,0 +1,43 @@
+name: Compilar Gipsy Rust
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Instalar Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache do Cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+
+      - name: Compilar
+        run: cargo build --release
+
+      - name: Preparar arquivo
+        run: |
+          mkdir -p release
+          cp target/release/gipsy-rust release/gipsy-rust
+
+      - name: Publicar compilado
+        uses: actions/upload-artifact@v4
+        with:
+          name: gipsy-rust-linux
+          path: release/gipsy-rust
